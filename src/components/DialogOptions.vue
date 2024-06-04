@@ -1,16 +1,29 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import IconRefresh from './icons/IconRefresh.vue'
 import IconShare from './icons/IconShare.vue'
 import IconThumbUp from './icons/IconThumbUp.vue'
 import IconThumbDown from './icons/IconThumbDown.vue'
+
+const thumbRef = ref('')
 </script>
 
 <template>
   <div class="dialog-options">
     <div class="option-group"><IconRefresh /><IconShare /></div>
     <div class="option-group">
-      <div class="svg-border"><IconThumbUp /></div>
-      <div class="svg-border"><IconThumbDown /></div>
+      <div
+        :class="thumbRef === 'up' ? 'svg-border selected' : 'svg-border'"
+        @click="thumbRef = 'up'"
+      >
+        <IconThumbUp />
+      </div>
+      <div
+        :class="thumbRef === 'down' ? 'svg-border selected' : 'svg-border'"
+        @click="thumbRef = 'down'"
+      >
+        <IconThumbDown />
+      </div>
     </div>
   </div>
 </template>
@@ -38,5 +51,13 @@ import IconThumbDown from './icons/IconThumbDown.vue'
   display: flex;
   place-items: center;
   place-content: center;
+
+  &:hover {
+    background: rgb(162, 191, 220, 0.2);
+  }
+}
+
+.selected {
+  border: 1px solid #133d66;
 }
 </style>

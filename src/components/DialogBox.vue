@@ -90,7 +90,7 @@ defineProps<Props>()
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  padding: 1rem;
+  padding: 0.75rem;
   padding-right: 3rem;
   border-radius: 5rem;
   border: 1px solid #133d66;
@@ -101,8 +101,8 @@ defineProps<Props>()
 
 .dialog-suggestion-icon {
   position: absolute;
-  right: 1rem;
-  top: 0.8rem;
+  right: 0.75rem;
+  top: 0.6rem;
 
   svg {
     height: 1.5rem;

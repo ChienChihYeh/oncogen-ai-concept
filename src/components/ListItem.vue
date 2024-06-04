@@ -23,7 +23,7 @@ defineProps<Props>()
 
 <style scoped lang="scss">
 .list-item {
-  padding: 1rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
@@ -65,7 +65,7 @@ p {
 
 @media screen and (max-width: 768px) {
   .list-item {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 }
 </style>
