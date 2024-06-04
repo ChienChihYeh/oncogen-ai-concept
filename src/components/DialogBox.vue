@@ -97,6 +97,10 @@ defineProps<Props>()
   margin-left: 4rem;
   margin-bottom: 2rem;
   position: relative;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
 }
 
 .dialog-suggestion-icon {

@@ -53,7 +53,7 @@ const thumbRef = ref('')
   place-content: center;
 
   &:hover {
-    background: rgb(162, 191, 220, 0.2);
+    background-color: #f5f5f5;
   }
 }
 
