@@ -54,7 +54,7 @@ const dialogInput = ref('')
 .dialog-input-icon {
   position: absolute;
   display: flex;
-  right: 1.5rem;
+  right: 1rem;
   gap: 1rem;
 }
 

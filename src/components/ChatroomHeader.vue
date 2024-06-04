@@ -4,18 +4,26 @@ import IconClear from './icons/IconClear.vue'
 import IconDialogs from './icons/IconDialogs.vue'
 import ChatbotPortrait from './ChatbotPortrait.vue'
 import { RouterLink } from 'vue-router'
+
+defineProps({
+  isShowList: {
+    type: Boolean,
+    default: true
+  }
+})
+defineEmits<{ 'update:isShowList': [value: boolean] }>()
 </script>
 <template>
   <div class="chatroom-header">
-    <div class="chatroom-section">
-      <RouterLink to="/"><IconReturn /></RouterLink>
+    <div class="chatroom-section flex-gap">
+      <div @click.stop="$emit('update:isShowList', !isShowList)"><IconDialogs /></div>
+      <IconClear />
     </div>
     <div class="chatroom-section flex-center">
       <ChatbotPortrait />
     </div>
-    <div class="chatroom-section flex-end flex-gap">
-      <IconClear />
-      <IconDialogs />
+    <div class="chatroom-section flex-end">
+      <RouterLink to="/"><IconReturn /></RouterLink>
     </div>
   </div>
 </template>
@@ -51,5 +59,6 @@ import { RouterLink } from 'vue-router'
 svg {
   cursor: pointer;
   width: 1.5rem;
+  vertical-align: middle;
 }
 </style>
