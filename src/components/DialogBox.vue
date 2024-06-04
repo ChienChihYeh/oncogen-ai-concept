@@ -113,4 +113,10 @@ defineProps<Props>()
     width: 1.5rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .dialog-box {
+    gap: 0.75rem;
+  }
+}
 </style>
