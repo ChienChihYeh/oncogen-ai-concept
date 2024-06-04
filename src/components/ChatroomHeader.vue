@@ -21,10 +21,13 @@ import { RouterLink } from 'vue-router'
 </template>
 <style scoped>
 .chatroom-header {
+  position: sticky;
+  top: 0;
   border-bottom: 1px solid #ccc;
   height: 5rem;
   display: flex;
   padding: 0 2.5rem;
+  background-color: #fff;
 }
 
 .chatroom-section {
@@ -47,5 +50,6 @@ import { RouterLink } from 'vue-router'
 
 svg {
   cursor: pointer;
+  width: 1.5rem;
 }
 </style>
