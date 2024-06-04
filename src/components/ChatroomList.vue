@@ -43,6 +43,7 @@ defineEmits<{ 'update:isShowList': [value: boolean] }>()
   background-color: #fafafa;
   overflow: auto;
   animation: slide-in 0.05s ease-out;
+  z-index: 20;
 }
 
 .list-header {
@@ -76,6 +77,12 @@ defineEmits<{ 'update:isShowList': [value: boolean] }>()
   }
   to {
     transform: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list-header button {
+    left: 1rem;
   }
 }
 </style>

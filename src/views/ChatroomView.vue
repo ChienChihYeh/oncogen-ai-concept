@@ -18,5 +18,6 @@ const isShowList = ref(false)
 .chatroom {
   min-height: 100dvh;
   position: relative;
+  background-color: #fff;
 }
 </style>

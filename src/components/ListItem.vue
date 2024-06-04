@@ -62,4 +62,10 @@ p {
   color: #133d66;
   font-weight: 900;
 }
+
+@media screen and (max-width: 768px) {
+  .list-item {
+    padding: 1rem;
+  }
+}
 </style>

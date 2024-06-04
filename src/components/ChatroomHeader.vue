@@ -36,6 +36,7 @@ defineEmits<{ 'update:isShowList': [value: boolean] }>()
   display: flex;
   padding: 0 2.5rem;
   background-color: #fff;
+  z-index: 10;
 }
 
 .chatroom-section {
@@ -60,5 +61,11 @@ svg {
   cursor: pointer;
   width: 1.5rem;
   vertical-align: middle;
+}
+
+@media screen and (max-width: 768px) {
+  .chatroom-header {
+    padding: 0 1rem;
+  }
 }
 </style>
