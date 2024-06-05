@@ -34,7 +34,6 @@ defineProps<Props>()
   width: 100%;
   display: flex;
   align-items: flex-start;
-
   gap: 1rem;
 }
 
@@ -47,6 +46,9 @@ defineProps<Props>()
   width: max-content;
   padding: 1.5rem 1rem;
   border-radius: 1rem;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .bot {
@@ -84,7 +86,7 @@ defineProps<Props>()
 
 .dialog-suggestion {
   border: #133d66;
-  max-width: calc(100% - 4rem);
+  max-width: calc(100% - 8rem);
   width: max-content;
   text-wrap: nowrap;
   white-space: nowrap;
@@ -117,6 +119,10 @@ defineProps<Props>()
 @media screen and (max-width: 768px) {
   .dialog-box {
     gap: 0.75rem;
+  }
+
+  .bot {
+    max-width: calc(100% - 7.5rem);
   }
 }
 </style>
