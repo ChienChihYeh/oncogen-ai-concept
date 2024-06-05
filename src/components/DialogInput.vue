@@ -24,7 +24,7 @@ const dialogInput = ref('')
   bottom: 0;
   height: 7rem;
   padding: 2rem;
-  background-color: #fff;
+  background: linear-gradient(transparent 0%, #fff 15%, #fff 100%);
 }
 
 .dialog-input-container {
@@ -81,6 +81,7 @@ const dialogInput = ref('')
     border: 1px solid #adadad;
     border-bottom: none;
     transform: translateX(-1px);
+    background-color: #fff;
   }
 }
 </style>
