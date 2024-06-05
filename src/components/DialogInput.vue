@@ -30,6 +30,11 @@ const startListening = () => {
     alert('Your browser does not support the Speech API')
   }
 }
+
+const sendMessage = () => {
+  //TODO: actually send the message to the server and handle response
+  dialogInput.value = ''
+}
 </script>
 <template>
   <div class="dialog-footer">
@@ -42,17 +47,17 @@ const startListening = () => {
         :placeholder="isListening ? '語音輸入中...' : '請輸入訊息...'"
       />
       <div class="dialog-input-icon">
-        <div v-if="dialogInput === ''" @click="startListening">
+        <button v-if="dialogInput === ''" @click="startListening">
           <IconMicrophone />
-        </div>
-        <div v-else>
+        </button>
+        <button v-else @click="sendMessage">
           <IconSend />
-        </div>
+        </button>
       </div>
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .dialog-footer {
   position: fixed;
   width: 100%;
@@ -91,6 +96,13 @@ const startListening = () => {
   display: flex;
   right: 1rem;
   gap: 1rem;
+
+  button {
+    padding: 0;
+    background: none;
+    outline: none;
+    border: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
