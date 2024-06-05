@@ -4,15 +4,50 @@ import IconMicrophone from './icons/IconMicrophone.vue'
 import IconSend from './icons/IconSend.vue'
 
 const dialogInput = ref('')
+const isListening = ref(false)
+
+const windowSpeechRecognition = webkitSpeechRecognition || SpeechRecognition
+const recognition = new windowSpeechRecognition() || null
+
+if (recognition) {
+  recognition.continuous = false
+  recognition.interimResults = false
+  recognition.lang = 'zh-TW'
+
+  recognition.onresult = (event) => {
+    isListening.value = false
+    if (event.results.length > 0) {
+      dialogInput.value = event.results[0][0].transcript
+    }
+  }
+}
+
+const startListening = () => {
+  if (recognition) {
+    recognition.start()
+    isListening.value = true
+  } else {
+    alert('Your browser does not support the Speech API')
+  }
+}
 </script>
 <template>
   <div class="dialog-footer">
     <div class="footer-border"></div>
     <div class="dialog-input-container">
-      <input type="text" class="dialog-input" v-model="dialogInput" placeholder="請輸入訊息..." />
+      <input
+        type="text"
+        class="dialog-input"
+        v-model="dialogInput"
+        :placeholder="isListening ? '語音輸入中...' : '請輸入訊息...'"
+      />
       <div class="dialog-input-icon">
-        <IconMicrophone v-if="dialogInput === ''" />
-        <IconSend v-else />
+        <div v-if="dialogInput === ''" @click="startListening">
+          <IconMicrophone />
+        </div>
+        <div v-else>
+          <IconSend />
+        </div>
       </div>
     </div>
   </div>
