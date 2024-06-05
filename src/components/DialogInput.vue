@@ -64,7 +64,7 @@ const sendMessage = () => {
   bottom: 0;
   height: 7rem;
   padding: 2rem;
-  background: linear-gradient(transparent 0%, #fff 15%, #fff 100%);
+  background: linear-gradient(transparent 0%, #fff 5%, #fff 100%);
 }
 
 .dialog-input-container {
