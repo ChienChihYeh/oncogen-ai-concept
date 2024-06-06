@@ -19,5 +19,11 @@ const isShowList = ref(false)
   min-height: 100dvh;
   position: relative;
   background-color: #fff;
+  padding-bottom: 6rem;
+}
+
+.dialog-container {
+  height: calc(100dvh - 11rem);
+  overflow: auto;
 }
 </style>

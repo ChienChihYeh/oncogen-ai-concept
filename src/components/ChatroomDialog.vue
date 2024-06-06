@@ -11,13 +11,15 @@ const suggestion = 'Hello darkness my old friend.'
 </script>
 
 <template>
-  <div class="chatroom-dialogs">
-    <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
-    <DialogBox sender="user" :message="mockMessage" />
-    <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
-    <DialogBox sender="user" :message="mockMessage" />
-    <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
-    <DialogBox sender="user" :message="mockMessage" />
+  <div class="dialog-container">
+    <div class="chatroom-dialogs">
+      <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
+      <DialogBox sender="user" :message="mockMessage" />
+      <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
+      <DialogBox sender="user" :message="mockMessage" />
+      <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
+      <DialogBox sender="user" :message="mockMessage" />
+    </div>
   </div>
   <DialogInput />
 </template>
@@ -26,6 +28,8 @@ const suggestion = 'Hello darkness my old friend.'
   width: 100%;
   max-width: 1024px;
   margin: auto;
-  padding: 2rem 0.75rem 6rem;
+  padding: 0 2rem;
+  padding-top: 1rem;
+  overflow: auto;
 }
 </style>
