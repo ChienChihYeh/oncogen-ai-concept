@@ -15,6 +15,10 @@ const router = createRouter({
       name: 'chatroom',
       component: () => import('../views/ChatroomView.vue')
       // component: ChatroomView
+    },
+    {
+      path: '/:catchAll(.*)*',
+      redirect: { name: 'home', params: {} }
     }
     // {
     //   path: '/about',

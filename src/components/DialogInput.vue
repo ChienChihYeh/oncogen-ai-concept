@@ -3,6 +3,10 @@ import { ref } from 'vue'
 import IconMicrophone from './icons/IconMicrophone.vue'
 import IconSend from './icons/IconSend.vue'
 
+const props = defineProps<{
+  sendMessage: (message: string) => void
+}>()
+
 const dialogInput = ref('')
 const isListening = ref(false)
 
@@ -31,8 +35,8 @@ const startListening = () => {
   }
 }
 
-const sendMessage = () => {
-  //TODO: actually send the message to the server and handle response
+const handleSubmit = () => {
+  props.sendMessage(dialogInput.value)
   dialogInput.value = ''
 }
 </script>
@@ -50,7 +54,7 @@ const sendMessage = () => {
         <button v-if="dialogInput === ''" @click="startListening">
           <IconMicrophone />
         </button>
-        <button v-else @click="sendMessage">
+        <button v-else @click="handleSubmit">
           <IconSend />
         </button>
       </div>

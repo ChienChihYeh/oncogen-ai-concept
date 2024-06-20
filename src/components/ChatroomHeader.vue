@@ -3,27 +3,31 @@ import IconReturn from './icons/IconReturn.vue'
 import IconClear from './icons/IconClear.vue'
 import IconDialogs from './icons/IconDialogs.vue'
 import ChatbotPortrait from './ChatbotPortrait.vue'
-import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-defineProps({
-  isShowList: {
-    type: Boolean,
-    default: true
-  }
-})
+const router = useRouter()
+
+defineProps<{ isShowList: boolean; handleClearDialogs: () => void }>()
 defineEmits<{ 'update:isShowList': [value: boolean] }>()
+
+function logoutUser() {
+  localStorage.removeItem('user')
+  router.push('home')
+}
 </script>
 <template>
   <div class="chatroom-header">
     <div class="chatroom-section flex-gap">
       <div @click.stop="$emit('update:isShowList', !isShowList)"><IconDialogs /></div>
-      <IconClear />
+      <div @click.stop="handleClearDialogs">
+        <IconClear />
+      </div>
     </div>
     <div class="chatroom-section flex-center">
       <ChatbotPortrait />
     </div>
-    <div class="chatroom-section flex-end">
-      <RouterLink to="/"><IconReturn /></RouterLink>
+    <div class="chatroom-section flex-end" @click.stop="logoutUser">
+      <IconReturn />
     </div>
   </div>
 </template>

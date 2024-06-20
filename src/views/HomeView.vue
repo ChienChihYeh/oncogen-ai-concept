@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import LoginCard from '../components/LoginCard.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+if (localStorage.getItem('user')) {
+  router.push('chatroom')
+}
 </script>
 
 <template>

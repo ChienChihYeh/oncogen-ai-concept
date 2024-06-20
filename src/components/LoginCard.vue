@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import IconCdss from './icons/IconCdss.vue'
+import { ref } from 'vue'
 const router = useRouter()
+const userName = ref('')
+const userList = ['doctor', 'patient', 'nurse']
 
 function handleLogin(e: Event) {
   e.preventDefault()
-  router.push('chatroom')
+  if (userList.includes(userName.value)) {
+    localStorage.setItem('user', userName.value)
+    router.push('chatroom')
+  } else {
+    alert('無效的帳號密碼!')
+  }
 }
 </script>
 
@@ -18,7 +26,14 @@ function handleLogin(e: Event) {
     <form @submit.prevent="handleLogin">
       <div class="form-group">
         <div>
-          <input type="text" id="username" name="username" placeholder="用戶名稱" required />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="用戶名稱"
+            required
+            v-model="userName"
+          />
         </div>
         <div>
           <input type="password" id="password" name="password" placeholder="密碼" required />

@@ -1,27 +1,27 @@
 <script setup lang="ts">
 import DialogInput from './DialogInput.vue'
 import DialogBox from './DialogBox.vue'
+import type { DialogType } from '@/types/Types'
 
-const mockMessage =
-  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sint ea accusantium aspernatur adipisci distinctio, deleniti odio magnam quas soluta ad? Possimus dolorem laudantium deleniti a tempora natus, distinctio iure.'
-
-// const mockMessage = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-
-const suggestion = 'Hello darkness my old friend.'
+defineProps<{
+  dialogs: DialogType[]
+  handleUserSubmit: (message: string) => void
+}>()
 </script>
 
 <template>
   <div class="dialog-container">
     <div class="chatroom-dialogs">
-      <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
-      <DialogBox sender="user" :message="mockMessage" />
-      <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
-      <DialogBox sender="user" :message="mockMessage" />
-      <DialogBox sender="bot" :suggestion="suggestion" :message="mockMessage" />
-      <DialogBox sender="user" :message="mockMessage" />
+      <DialogBox
+        v-for="(dialog, index) in dialogs"
+        :key="index"
+        :sender="dialog.name"
+        :message="dialog.text"
+        :suggestion="dialog.suggestions"
+      />
     </div>
   </div>
-  <DialogInput />
+  <DialogInput :send-message="handleUserSubmit" />
 </template>
 <style scoped>
 .chatroom-dialogs {
