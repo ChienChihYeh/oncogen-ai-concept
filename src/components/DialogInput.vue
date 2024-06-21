@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import IconMicrophone from './icons/IconMicrophone.vue'
 import IconSend from './icons/IconSend.vue'
+import type { DialogType } from '@/types/Types'
 
 const props = defineProps<{
   sendMessage: (message: string) => void
+  dialogs: DialogType[]
 }>()
 
 const dialogInput = ref('')
 const isListening = ref(false)
 const inputElementRef = ref()
+const isSumbitDisabled = ref(false)
 
 const windowSpeechRecognition = webkitSpeechRecognition || SpeechRecognition
 const recognition = new windowSpeechRecognition() || null
@@ -43,6 +46,13 @@ const handleSubmit = () => {
   props.sendMessage(dialogInput.value)
   dialogInput.value = ''
 }
+
+watch(
+  () => props.dialogs,
+  () => {
+    isSumbitDisabled.value = !isSumbitDisabled.value
+  }
+)
 </script>
 <template>
   <div class="dialog-footer">
@@ -57,10 +67,14 @@ const handleSubmit = () => {
           ref="inputElementRef"
         />
         <div class="dialog-input-icon">
-          <button v-if="dialogInput === ''" @click.prevent="startListening">
+          <button
+            v-if="dialogInput === ''"
+            @click.prevent="startListening"
+            :disabled="isSumbitDisabled"
+          >
             <IconMicrophone />
           </button>
-          <button v-else type="submit">
+          <button v-else type="submit" :disabled="isSumbitDisabled">
             <IconSend />
           </button>
         </div>
@@ -112,6 +126,10 @@ const handleSubmit = () => {
     background: none;
     outline: none;
     border: none;
+
+    &:disabled {
+      opacity: 0.4;
+    }
   }
 }
 

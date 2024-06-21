@@ -68,10 +68,13 @@ watch(dialogs, () => {
   position: relative;
   background-color: #fff;
   padding-bottom: 6rem;
+  width: 100vw;
 }
 
 .dialog-container {
   height: calc(100dvh - 11rem);
+  width: 100%;
   overflow: auto;
+  scrollbar-gutter: stable;
 }
 </style>

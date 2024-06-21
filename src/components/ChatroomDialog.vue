@@ -1,12 +1,23 @@
 <script setup lang="ts">
+import { ref, watch, nextTick } from 'vue'
 import DialogInput from './DialogInput.vue'
 import DialogBox from './DialogBox.vue'
 import type { DialogType } from '@/types/Types'
 
-defineProps<{
+const props = defineProps<{
   dialogs: DialogType[]
   handleUserSubmit: (message: string) => void
 }>()
+
+const bottomElement = ref()
+
+watch(
+  () => props.dialogs,
+  async () => {
+    await nextTick()
+    bottomElement.value.scrollIntoView({ block: 'end', behavior: 'smooth' })
+  }
+)
 </script>
 
 <template>
@@ -20,8 +31,9 @@ defineProps<{
         :suggestion="dialog.suggestions"
       />
     </div>
+    <div ref="bottomElement"></div>
   </div>
-  <DialogInput :send-message="handleUserSubmit" />
+  <DialogInput :send-message="handleUserSubmit" :dialogs="dialogs" />
 </template>
 <style scoped>
 .chatroom-dialogs {
