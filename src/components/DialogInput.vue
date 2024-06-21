@@ -50,7 +50,11 @@ const handleSubmit = () => {
 watch(
   () => props.dialogs,
   () => {
-    isSumbitDisabled.value = !isSumbitDisabled.value
+    if (props.dialogs.length % 2 === 0) {
+      isSumbitDisabled.value = true
+    } else {
+      isSumbitDisabled.value = false
+    }
   }
 )
 </script>
