@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import IconArrowRight from './icons/IconArrowRight.vue'
 import DialogOptions from './DialogOptions.vue'
+import { getUserPortraitPath } from '../utils/chatHelper'
 type Props = {
   sender: 'user' | 'bot'
   message: string
   suggestion?: string
 }
+
+const user = localStorage.getItem('user') || ''
+
+const portraitPath = getUserPortraitPath(user)
 
 defineProps<Props>()
 </script>
@@ -13,7 +18,7 @@ defineProps<Props>()
 <template>
   <div :class="sender === 'user' ? 'dialog-box user-message' : 'dialog-box'">
     <div class="user-avatar">
-      <img v-if="sender === 'user'" src="/user_female.png" alt="user" />
+      <img v-if="sender === 'user'" :src="portraitPath" alt="user" />
       <span v-else>宇知</span>
     </div>
     <div :class="sender === 'user' ? 'dialog-content user' : 'dialog-content bot'">

@@ -30,12 +30,14 @@ const thumbRef = ref('')
 
 <style scoped lang="scss">
 .dialog-options {
+  width: max-content;
   padding: 0 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0.75rem;
   margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
 .option-group {
