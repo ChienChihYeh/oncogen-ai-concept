@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import IconMicrophone from './icons/IconMicrophone.vue'
 import IconSend from './icons/IconSend.vue'
 
@@ -9,6 +9,7 @@ const props = defineProps<{
 
 const dialogInput = ref('')
 const isListening = ref(false)
+const inputElementRef = ref()
 
 const windowSpeechRecognition = webkitSpeechRecognition || SpeechRecognition
 const recognition = new windowSpeechRecognition() || null
@@ -18,11 +19,14 @@ if (recognition) {
   recognition.interimResults = false
   recognition.lang = 'zh-TW'
 
-  recognition.onresult = (event) => {
+  recognition.onresult = async (event) => {
     isListening.value = false
+
     if (event.results.length > 0) {
       dialogInput.value = event.results[0][0].transcript
     }
+    await nextTick()
+    inputElementRef.value.focus()
   }
 }
 
@@ -43,22 +47,25 @@ const handleSubmit = () => {
 <template>
   <div class="dialog-footer">
     <div class="footer-border"></div>
-    <div class="dialog-input-container">
-      <input
-        type="text"
-        class="dialog-input"
-        v-model="dialogInput"
-        :placeholder="isListening ? '語音輸入中...' : '請輸入訊息...'"
-      />
-      <div class="dialog-input-icon">
-        <button v-if="dialogInput === ''" @click="startListening">
-          <IconMicrophone />
-        </button>
-        <button v-else @click="handleSubmit">
-          <IconSend />
-        </button>
+    <form @submit.prevent="handleSubmit">
+      <div class="dialog-input-container">
+        <input
+          type="text"
+          class="dialog-input"
+          v-model="dialogInput"
+          :placeholder="isListening ? '語音輸入中...' : '請輸入訊息...'"
+          ref="inputElementRef"
+        />
+        <div class="dialog-input-icon">
+          <button v-if="dialogInput === ''" @click.prevent="startListening">
+            <IconMicrophone />
+          </button>
+          <button v-else type="submit">
+            <IconSend />
+          </button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 <style scoped lang="scss">
